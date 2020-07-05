@@ -42,7 +42,7 @@ export interface Attribute {
   format?: Format;
   required?: boolean;
   defaultValue?: any;
-  primaryKey?: boolean;
+  key?: boolean;
   unique?: boolean;
   noinsert?: boolean;
   noupdate?: boolean;
@@ -67,7 +67,7 @@ export interface Attribute {
 export interface MetaModel {
   model: Model;
   attributeName?: string;
-  primaryKeys?: string[];
+  keys?: string[];
   attributes: Attribute[];
   selectableAttributes?: Attribute[];
   insertableAttributes?: Attribute[];
@@ -81,20 +81,20 @@ export interface MetaModel {
   maxAttributes?: Attribute[];
   minAttributes?: Attribute[];
   regExpAttributes?: Attribute[];
-  boolFields?: string[];
-  dateFields?: string[];
-  integerFields?: string[];
-  numberFields?: string[];
-  percentageFields?: string[];
-  currencyFields?: string[];
-  emailFields?: string[];
-  urlFields?: string[];
-  phoneFields?: string[];
-  faxFields?: string[];
-  ipv4Fields?: string[];
-  ipv6Fields?: string[];
-  objectFields?: MetaModel[];
-  arrayFields?: MetaModel[];
+  booleans?: string[];
+  dates?: string[];
+  integers?: string[];
+  numbers?: string[];
+  percentages?: string[];
+  currencies?: string[];
+  emails?: string[];
+  urls?: string[];
+  phones?: string[];
+  faxes?: string[];
+  ipv4s?: string[];
+  ipv6s?: string[];
+  objects?: MetaModel[];
+  arrays?: MetaModel[];
   map?: Map<string, string>;
   version?: string;
 }
@@ -150,7 +150,7 @@ export function build(model: Model): MetaModel {
         metadata.version = attr.name;
       }
       if (attr.ignored !== true) {
-        if (attr.primaryKey === true) {
+        if (attr.key === true) {
           primaryKeys.push(attr.name);
           selectableAttributes.push(attr);
         } else {
@@ -269,7 +269,7 @@ export function build(model: Model): MetaModel {
   }
   metadata.map = map;
   if (primaryKeys.length > 0) {
-    metadata.primaryKeys = primaryKeys;
+    metadata.keys = primaryKeys;
   }
   metadata.attributes = attributes;
   metadata.selectableAttributes = selectableAttributes;
@@ -297,46 +297,46 @@ export function build(model: Model): MetaModel {
     metadata.regExpAttributes = regExpAttributes;
   }
   if (boolFields.length > 0) {
-    metadata.boolFields = boolFields;
+    metadata.booleans = boolFields;
   }
   if (dateFields.length > 0) {
-    metadata.dateFields = dateFields;
+    metadata.dates = dateFields;
   }
   if (integerFields.length > 0) {
-    metadata.integerFields = integerFields;
+    metadata.integers = integerFields;
   }
   if (numberFields.length > 0) {
-    metadata.numberFields = numberFields;
+    metadata.numbers = numberFields;
   }
   if (percentageFields.length > 0) {
-    metadata.percentageFields = percentageFields;
+    metadata.percentages = percentageFields;
   }
   if (currencyFields.length > 0) {
-    metadata.currencyFields = currencyFields;
+    metadata.currencies = currencyFields;
   }
   if (emailFields.length > 0) {
-    metadata.emailFields = emailFields;
+    metadata.emails = emailFields;
   }
   if (urlFields.length > 0) {
-    metadata.urlFields = urlFields;
+    metadata.urls = urlFields;
   }
   if (phoneFields.length > 0) {
-    metadata.phoneFields = phoneFields;
+    metadata.phones = phoneFields;
   }
   if (faxFields.length > 0) {
-    metadata.faxFields = faxFields;
+    metadata.faxes = faxFields;
   }
   if (ipv4Fields.length > 0) {
-    metadata.ipv4Fields = ipv4Fields;
+    metadata.ipv4s = ipv4Fields;
   }
   if (ipv6Fields.length > 0) {
-    metadata.ipv6Fields = ipv6Fields;
+    metadata.ipv6s = ipv6Fields;
   }
   if (objectFields.length > 0) {
-    metadata.objectFields = objectFields;
+    metadata.objects = objectFields;
   }
   if (arrayFields.length > 0) {
-    metadata.arrayFields = arrayFields;
+    metadata.arrays = arrayFields;
   }
   return metadata;
 }
