@@ -6,6 +6,7 @@ export enum Type {
   Number = 'number',
   Integer = 'integer',
   String = 'string',
+  Text = 'text',
 
   Object = 'object',
   Array = 'array',
@@ -66,7 +67,7 @@ export interface Attribute {
 export interface MetaModel {
   model: Model;
   attributeName?: string;
-  primaryKeys?: Attribute[];
+  primaryKeys?: string[];
   attributes: Attribute[];
   selectableAttributes?: Attribute[];
   insertableAttributes?: Attribute[];
@@ -106,7 +107,7 @@ export function build(model: Model): MetaModel {
     model,
     attributes: model.attributes
   };
-  const primaryKeys: Attribute[] = new Array<Attribute>();
+  const primaryKeys: string[] = new Array<string>();
   const attributes: Attribute[] = new Array<Attribute>();
   const selectableAttributes: Attribute[] = new Array<Attribute>();
   const insertableAttributes: Attribute[] = new Array<Attribute>();
@@ -150,7 +151,7 @@ export function build(model: Model): MetaModel {
       }
       if (attr.ignored !== true) {
         if (attr.primaryKey === true) {
-          primaryKeys.push(attr);
+          primaryKeys.push(attr.name);
           selectableAttributes.push(attr);
         } else {
           selectableAttributes.push(attr);
