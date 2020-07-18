@@ -81,20 +81,20 @@ export interface MetaModel {
   maxAttributes?: Attribute[];
   minAttributes?: Attribute[];
   regExpAttributes?: Attribute[];
-  booleans?: string[];
-  dates?: string[];
-  integers?: string[];
-  numbers?: string[];
-  percentages?: string[];
-  currencies?: string[];
-  emails?: string[];
-  urls?: string[];
-  phones?: string[];
-  faxes?: string[];
-  ipv4s?: string[];
-  ipv6s?: string[];
-  objects?: MetaModel[];
-  arrays?: MetaModel[];
+  booleanFields?: string[];
+  dateFields?: string[];
+  integerFields?: string[];
+  numberFields?: string[];
+  percentageFields?: string[];
+  currencyFields?: string[];
+  emailFields?: string[];
+  urlFields?: string[];
+  phoneFields?: string[];
+  faxFields?: string[];
+  ipv4Fields?: string[];
+  ipv6Fields?: string[];
+  objectFields?: MetaModel[];
+  arrayFields?: MetaModel[];
   map?: Map<string, string>;
   version?: string;
 }
@@ -297,46 +297,46 @@ export function build(model: Model): MetaModel {
     metadata.regExpAttributes = regExpAttributes;
   }
   if (boolFields.length > 0) {
-    metadata.booleans = boolFields;
+    metadata.booleanFields = boolFields;
   }
   if (dateFields.length > 0) {
-    metadata.dates = dateFields;
+    metadata.dateFields = dateFields;
   }
   if (integerFields.length > 0) {
-    metadata.integers = integerFields;
+    metadata.integerFields = integerFields;
   }
   if (numberFields.length > 0) {
-    metadata.numbers = numberFields;
+    metadata.numberFields = numberFields;
   }
   if (percentageFields.length > 0) {
-    metadata.percentages = percentageFields;
+    metadata.percentageFields = percentageFields;
   }
   if (currencyFields.length > 0) {
-    metadata.currencies = currencyFields;
+    metadata.currencyFields = currencyFields;
   }
   if (emailFields.length > 0) {
-    metadata.emails = emailFields;
+    metadata.emailFields = emailFields;
   }
   if (urlFields.length > 0) {
-    metadata.urls = urlFields;
+    metadata.urlFields = urlFields;
   }
   if (phoneFields.length > 0) {
-    metadata.phones = phoneFields;
+    metadata.phoneFields = phoneFields;
   }
   if (faxFields.length > 0) {
-    metadata.faxes = faxFields;
+    metadata.faxFields = faxFields;
   }
   if (ipv4Fields.length > 0) {
-    metadata.ipv4s = ipv4Fields;
+    metadata.ipv4Fields = ipv4Fields;
   }
   if (ipv6Fields.length > 0) {
-    metadata.ipv6s = ipv6Fields;
+    metadata.ipv6Fields = ipv6Fields;
   }
   if (objectFields.length > 0) {
-    metadata.objects = objectFields;
+    metadata.objectFields = objectFields;
   }
   if (arrayFields.length > 0) {
-    metadata.arrays = arrayFields;
+    metadata.arrayFields = arrayFields;
   }
   return metadata;
 }
