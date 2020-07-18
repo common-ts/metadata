@@ -68,7 +68,7 @@ export interface MetaModel {
   model: Model;
   attributeName?: string;
   keys?: string[];
-  attributes: Attribute[];
+  attributes?: Attribute[];
   selectableAttributes?: Attribute[];
   insertableAttributes?: Attribute[];
   updatableAttributes?: Attribute[];
