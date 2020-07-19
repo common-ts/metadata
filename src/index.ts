@@ -38,7 +38,6 @@ export interface MetaModel {
   model: Model;
   attributeName?: string;
   keys?: string[];
-  booleanFields?: string[];
   dateFields?: string[];
   integerFields?: string[];
   numberFields?: string[];
@@ -47,7 +46,6 @@ export interface MetaModel {
   faxFields?: string[];
   objectFields?: MetaModel[];
   arrayFields?: MetaModel[];
-  map?: Map<string, string>;
   version?: string;
 }
 
@@ -57,7 +55,6 @@ export function build(model: Model): MetaModel {
   }
   const metadata: MetaModel = {model};
   const primaryKeys: string[] = new Array<string>();
-  const boolFields = new Array<string>();
   const dateFields = new Array<string>();
   const integerFields = new Array<string>();
   const numberFields = new Array<string>();
@@ -66,16 +63,11 @@ export function build(model: Model): MetaModel {
   const faxFields = new Array<string>();
   const objectFields = new Array<MetaModel>();
   const arrayFields = new Array<MetaModel>();
-  const map = new Map<string, string>();
   const keys: string[] = Object.keys(model.attributes);
   for (const key of keys) {
     const attr: Attribute = model.attributes[key];
     if (attr) {
       attr.name = key;
-      const mapField = (attr.field ? attr.field.toLowerCase() : key.toLowerCase());
-      if (mapField !== key) {
-        map[mapField] = key;
-      }
       if (attr.version) {
         metadata.version = attr.name;
       }
@@ -123,10 +115,6 @@ export function build(model: Model): MetaModel {
           dateFields.push(attr.name);
           break;
         }
-        case Type.Boolean: {
-          boolFields.push(attr.name);
-          break;
-        }
         case Type.Object: {
           if (attr.typeof) {
             const x = build(attr.typeof);
@@ -148,12 +136,8 @@ export function build(model: Model): MetaModel {
       }
     }
   }
-  metadata.map = map;
   if (primaryKeys.length > 0) {
     metadata.keys = primaryKeys;
-  }
-  if (boolFields.length > 0) {
-    metadata.booleanFields = boolFields;
   }
   if (dateFields.length > 0) {
     metadata.dateFields = dateFields;
