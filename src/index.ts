@@ -53,8 +53,8 @@ export function build(model: Model): MetaModel {
   if (model && !model.source) {
     model.source = model.name;
   }
-  const metadata: MetaModel = {model};
-  const primaryKeys: string[] = new Array<string>();
+  const meta: MetaModel = {model};
+  const pks: string[] = new Array<string>();
   const dateFields = new Array<string>();
   const integerFields = new Array<string>();
   const numberFields = new Array<string>();
@@ -69,11 +69,11 @@ export function build(model: Model): MetaModel {
     if (attr) {
       attr.name = key;
       if (attr.version) {
-        metadata.version = attr.name;
+        meta.version = attr.name;
       }
       if (attr.ignored !== true) {
-        if (attr.key === true) {
-          primaryKeys.push(attr.name);
+        if (attr.key) {
+          pks.push(attr.name);
         }
       }
 
@@ -136,32 +136,32 @@ export function build(model: Model): MetaModel {
       }
     }
   }
-  if (primaryKeys.length > 0) {
-    metadata.keys = primaryKeys;
+  if (pks.length > 0) {
+    meta.keys = pks;
   }
   if (dateFields.length > 0) {
-    metadata.dateFields = dateFields;
+    meta.dateFields = dateFields;
   }
   if (integerFields.length > 0) {
-    metadata.integerFields = integerFields;
+    meta.integerFields = integerFields;
   }
   if (numberFields.length > 0) {
-    metadata.numberFields = numberFields;
+    meta.numberFields = numberFields;
   }
   if (currencyFields.length > 0) {
-    metadata.currencyFields = currencyFields;
+    meta.currencyFields = currencyFields;
   }
   if (phoneFields.length > 0) {
-    metadata.phoneFields = phoneFields;
+    meta.phoneFields = phoneFields;
   }
   if (faxFields.length > 0) {
-    metadata.faxFields = faxFields;
+    meta.faxFields = faxFields;
   }
   if (objectFields.length > 0) {
-    metadata.objectFields = objectFields;
+    meta.objectFields = objectFields;
   }
   if (arrayFields.length > 0) {
-    metadata.arrayFields = arrayFields;
+    meta.arrayFields = arrayFields;
   }
-  return metadata;
+  return meta;
 }
