@@ -1,13 +1,17 @@
 export enum Type {
+  ObjectId = 'ObjectId',
   Date = 'date',
   Boolean = 'boolean',
 
   Number = 'number',
   Integer = 'integer',
   String = 'string',
+  Text = 'text',
 
   Object = 'object',
   Array = 'array',
+  Primitives =  'primitives',
+  Binary = 'binary'
 }
 
 export enum Format {
@@ -19,7 +23,7 @@ export enum Format {
 
 export interface Model {
   name?: string;
-  attributes: any;
+  attributes: Attributes;
   source?: string;
 }
 
@@ -32,6 +36,9 @@ export interface Attribute {
   version?: boolean;
   ignored?: boolean;
   typeof?: Model;
+}
+export interface Attributes {
+  [key: string]: Attribute;
 }
 
 export interface MetaModel {
